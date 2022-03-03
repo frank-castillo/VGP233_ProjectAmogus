@@ -2,3 +2,8 @@ class A
 {
 
 }
+
+class B
+{
+
+}
