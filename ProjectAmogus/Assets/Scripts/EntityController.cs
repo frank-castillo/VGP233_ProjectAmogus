@@ -20,22 +20,22 @@ public class EntityController : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
             {
-                targetRB.AddForce(new Vector3(0.0f, 0.0f, 0.1f), ForceMode.Impulse);
+                targetRB.AddForce(new Vector3(0.0f, 0.0f, 0.01f), ForceMode.Impulse);
             }
 
             if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
             {
-                targetRB.AddForce(new Vector3(-0.1f, 0.0f, 0.0f), ForceMode.Impulse);
+                targetRB.AddForce(new Vector3(-0.01f, 0.0f, 0.0f), ForceMode.Impulse);
             }
 
             if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
             {
-                targetRB.AddForce(new Vector3(0.0f, 0.0f, -0.1f), ForceMode.Impulse);
+                targetRB.AddForce(new Vector3(0.0f, 0.0f, -0.01f), ForceMode.Impulse);
             }
 
             if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
             {
-                targetRB.AddForce(new Vector3(0.1f, 0.0f, 0.0f), ForceMode.Impulse);
+                targetRB.AddForce(new Vector3(0.01f, 0.0f, 0.0f), ForceMode.Impulse);
             }
         }
     }

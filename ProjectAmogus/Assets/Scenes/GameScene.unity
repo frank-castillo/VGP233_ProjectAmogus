@@ -2287,8 +2287,9 @@ GameObject:
   - component: {fileID: 53082036}
   - component: {fileID: 53082035}
   - component: {fileID: 53082034}
+  - component: {fileID: 53082040}
   m_Layer: 0
-  m_Name: AllyEntity (2)
+  m_Name: AllyEntity_Cael
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2401,6 +2402,19 @@ Transform:
   m_Father: {fileID: 1017879429}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &53082040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 53082033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd28fbb35ab0e674ea02c59d40a87348, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  whatType: 3
 --- !u!1 &56712584
 GameObject:
   m_ObjectHideFlags: 0
@@ -14862,8 +14876,9 @@ GameObject:
   - component: {fileID: 268312509}
   - component: {fileID: 268312508}
   - component: {fileID: 268312507}
+  - component: {fileID: 268312513}
   m_Layer: 0
-  m_Name: AllyEntity
+  m_Name: AllyEntity_Alex
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14976,6 +14991,19 @@ Transform:
   m_Father: {fileID: 1017879429}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &268312513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 268312506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd28fbb35ab0e674ea02c59d40a87348, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  whatType: 1
 --- !u!43 &273958058
 Mesh:
   m_ObjectHideFlags: 0
@@ -60352,9 +60380,10 @@ GameObject:
   - component: {fileID: 1055293847}
   - component: {fileID: 1055293851}
   - component: {fileID: 1055293852}
+  - component: {fileID: 1055293853}
   m_Layer: 0
   m_Name: PlayerEntity
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -60467,6 +60496,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
+--- !u!114 &1055293853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1055293846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd28fbb35ab0e674ea02c59d40a87348, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  whatType: 0
 --- !u!43 &1055709987
 Mesh:
   m_ObjectHideFlags: 0
@@ -116135,8 +116177,9 @@ GameObject:
   - component: {fileID: 2037809873}
   - component: {fileID: 2037809872}
   - component: {fileID: 2037809871}
+  - component: {fileID: 2037809877}
   m_Layer: 0
-  m_Name: AllyEntity (1)
+  m_Name: AllyEntity_Berg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -116249,6 +116292,19 @@ Transform:
   m_Father: {fileID: 1017879429}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2037809877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2037809870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd28fbb35ab0e674ea02c59d40a87348, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  whatType: 2
 --- !u!43 &2039217173
 Mesh:
   m_ObjectHideFlags: 0
