@@ -36,7 +36,7 @@ public enum StatusMode
 
 public class Entity : MonoBehaviour
 {
-    private float health;
+    protected float health;
     
     public float Health
     {
@@ -44,7 +44,7 @@ public class Entity : MonoBehaviour
         set { health = value; }
     }
 
-    private float maxHealth;
+    protected float maxHealth;
 
     public float MaxHealth
     {
@@ -52,14 +52,14 @@ public class Entity : MonoBehaviour
         set { maxHealth = value; }
     }
 
-    private float moveSpeed;
+    protected float moveSpeed;
 
     public float MoveSpeed
     {
         get { return moveSpeed; } 
         set { moveSpeed = value; }
     }
-    private float turnSpeed;
+    protected float turnSpeed;
     
     public float TurnSpeed
     {
@@ -68,7 +68,7 @@ public class Entity : MonoBehaviour
     }
 
     [SerializeField]private AIPriority priority;
-    [SerializeField]protected GameObject originPoint;
+    //[SerializeField]protected GameObject originPoint;
     protected NavMeshAgent navMeshAgent;
     public NavMeshAgent GetNavMeshAgent() { return navMeshAgent; }
     private void Awake()
@@ -97,11 +97,13 @@ public class Entity : MonoBehaviour
     public void SetDowned()
     {
         status = StatusMode.Downed;
+        Debug.Log(this.gameObject.name + "is Downed!");
     }
 
     public void SetStunned()
     {
         status = StatusMode.Stunned;
+        Debug.Log(this.gameObject.name + "is Stunned!");
     }
 
     public void SetHealth()
@@ -112,7 +114,8 @@ public class Entity : MonoBehaviour
     public void Damage(float value)
     {
         health -= value;
-        if(health <= 0.0f)
+        Debug.Log(this.gameObject.name + "took " + value + " DMG!");
+        if (health <= 0.0f)
         {
             health = 0.0f;
             SetDowned();

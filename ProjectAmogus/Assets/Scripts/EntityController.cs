@@ -92,7 +92,7 @@ public class EntityController : MonoBehaviour
 
         if (Physics.Raycast(transform.position, direction * distance, out RaycastHit hit, distance, wallMask))
         {
-            Debug.Log("hit");
+            //Debug.Log("hit");
             point.transform.position = hit.point;
             Debug.DrawLine(this.transform.position, hit.point - direction*2);
 
