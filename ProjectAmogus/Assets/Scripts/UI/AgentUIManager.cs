@@ -28,7 +28,6 @@ public class AgentUIManager : MonoBehaviour
     [SerializeField] private EntityUI[] entities;
     int generalOrder = 0;
 
-
     private static AgentUIManager uIManager;
 
     public static AgentUIManager Instance { get { return uIManager; } }
