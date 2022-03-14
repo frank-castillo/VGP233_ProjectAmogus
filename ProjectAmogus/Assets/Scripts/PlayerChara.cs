@@ -20,7 +20,7 @@ public class PlayerChara : Entity
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
 
-                switch (whatType)
+        switch (whatType)
         {
             case EntityType.Scientist:
                 {
@@ -74,7 +74,6 @@ public class PlayerChara : Entity
     {
         enemyFound = true;
         attackTarget = target;
-        Debug.Log("Hey!");
     }
 
     public void EnemyLost()
@@ -121,7 +120,7 @@ public class PlayerChara : Entity
         }
         else
         {
-            if (canAttack)
+            if (canAttack && attackTarget != null)
             {
                 Vector3 direction = (attackTarget.transform.position - transform.position).normalized;
                 Ray ray = new Ray(transform.position, direction);
@@ -132,10 +131,11 @@ public class PlayerChara : Entity
                 {
                     if (hit.collider.gameObject.CompareTag("Enemy"))
                     {
-                        hit.collider.gameObject.GetComponent<Entity>().Damage(30.0f);
+                        hit.collider.gameObject.GetComponent<Entity>().Damage(25.0f);
                         if (hit.collider.gameObject.GetComponent<Entity>().Status == StatusMode.Downed)
                         {
                             enemyFound = false;
+                            attackTarget = null;
                         }
                         canAttack = false;
                     }

@@ -21,7 +21,7 @@ public class EnemyChara : Entity
         {
             case EntityType.Swarm:
                 {
-                    MaxHealth = 20.0f;
+                    MaxHealth = 40.0f;
                     Health = MaxHealth;
                     MoveSpeed = 2.0f;
                     TurnSpeed = 2.0f;
@@ -30,7 +30,7 @@ public class EnemyChara : Entity
                 break;
             case EntityType.Monitor:
                 {
-                    MaxHealth = 75.0f;
+                    MaxHealth = 120.0f;
                     Health = MaxHealth;
                     MoveSpeed = 4.0f;
                     TurnSpeed = 4.0f;
@@ -39,7 +39,7 @@ public class EnemyChara : Entity
                 break;
             case EntityType.SuperMonitor:
                 {
-                    MaxHealth = 200.0f;
+                    MaxHealth = 250.0f;
                     Health = MaxHealth;
                     MoveSpeed = 4.0f;
                     TurnSpeed = 4.0f;
@@ -59,6 +59,12 @@ public class EnemyChara : Entity
     public void MakeEnemySleep()
     {
         isAsleep = true;
+    }
+
+    public override void Damage(float value)
+    {
+        base.Damage(value);
+        WakeEnemyUp();
     }
 
     public override void SetDowned()

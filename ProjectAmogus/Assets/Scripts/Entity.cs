@@ -111,7 +111,7 @@ public class Entity : MonoBehaviour
         status = StatusMode.Healthy;
     }
 
-    public void Damage(float value)
+    public virtual void Damage(float value)
     {
         health -= value;
         Debug.Log(this.gameObject.name + "took " + value + " DMG!");
