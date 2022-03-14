@@ -10,6 +10,12 @@ public class PlayerChara : Entity
     [SerializeField] protected GameObject originPoint;
     //protected NavMeshAgent navMeshAgent;
 
+    bool enemyFound = false;
+    float enemyTimeout = 5.0f;
+    bool canAttack = true;
+    float atkTimer = 3.0f;
+    Transform attackTarget;
+
     private void Awake()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
@@ -64,6 +70,18 @@ public class PlayerChara : Entity
         }
     }
 
+    public void EnemyFound(Transform target)
+    {
+        enemyFound = true;
+        attackTarget = target;
+        Debug.Log("Hey!");
+    }
+
+    public void EnemyLost()
+    {
+        enemyFound = false;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -96,7 +114,44 @@ public class PlayerChara : Entity
                     break;
             }
         }
-      
+
+        if(!enemyFound)
+        {
+
+        }
+        else
+        {
+            if (canAttack)
+            {
+                Vector3 direction = (attackTarget.transform.position - transform.position).normalized;
+                Ray ray = new Ray(transform.position, direction);
+                RaycastHit hit;
+                Debug.DrawRay(transform.position, direction, Color.blue);
+
+                if (Physics.Raycast(ray, out hit))
+                {
+                    if (hit.collider.gameObject.CompareTag("Enemy"))
+                    {
+                        hit.collider.gameObject.GetComponent<Entity>().Damage(30.0f);
+                        if (hit.collider.gameObject.GetComponent<Entity>().Status == StatusMode.Downed)
+                        {
+                            enemyFound = false;
+                        }
+                        canAttack = false;
+                    }
+                }
+            }
+            else
+            {
+                atkTimer -= Time.deltaTime;
+                if (atkTimer <= 0.0f)
+                {
+                    canAttack = true;
+                    atkTimer = 1.5f;
+                }
+
+            }
+        }
     }
 
     public void Follow()

@@ -86,7 +86,7 @@ public class Entity : MonoBehaviour
     //{
     //    get { return type; }
     //}
-    private StatusMode status;
+    protected StatusMode status;
 
     public StatusMode Status
     {
@@ -94,7 +94,7 @@ public class Entity : MonoBehaviour
         set { status = value; }
     }
 
-    public void SetDowned()
+    public virtual void SetDowned()
     {
         status = StatusMode.Downed;
         Debug.Log(this.gameObject.name + "is Downed!");

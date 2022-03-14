@@ -6,7 +6,7 @@ public class EnemyChara : Entity
 {
     [SerializeField] EntityType whatType;
     bool isAsleep = true;
-    float aiTimer = 3.0f;
+    float aiTimer = 5.0f;
     bool canAttack = true;
     float atkTimer = 1.0f;
 
@@ -61,6 +61,13 @@ public class EnemyChara : Entity
         isAsleep = true;
     }
 
+    public override void SetDowned()
+    {
+        status = StatusMode.Downed;
+        Debug.Log(this.gameObject.name + "is Downed!");
+        Object.Destroy(gameObject);
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -73,9 +80,16 @@ public class EnemyChara : Entity
                         //Prioritizing Target
 
                         var targets = FindObjectsOfType<PlayerChara>();
+                        List<PlayerChara> validTargets = new List<PlayerChara>();
+
+                        foreach(PlayerChara pChar in targets)
+                        {
+                            if (pChar.Status != StatusMode.Downed) validTargets.Add(pChar);
+                        }
+
                         Transform nearest = targets[0].transform;
 
-                        foreach (PlayerChara pchar in targets)
+                        foreach (PlayerChara pchar in validTargets)
                         {
                             var temp = Vector3.Distance(this.transform.position, pchar.transform.position);
                             if (temp < Vector3.Distance(this.transform.position, nearest.position)) nearest = pchar.transform;
@@ -88,28 +102,30 @@ public class EnemyChara : Entity
                             //Approach
                             this.transform.position = Vector3.MoveTowards(this.transform.position, nearest.position, MoveSpeed * Time.deltaTime);
 
-                            if (dist <= 3.0f && canAttack)
+                            if(canAttack)
                             {
-                                //Melee Attack
-                                Vector3 direction = (nearest.position - transform.position).normalized;
-                                Ray ray = new Ray(transform.position, direction);
-                                RaycastHit hit;
-                                Debug.DrawRay(transform.position, direction, Color.red);
-
-                                if (Physics.Raycast(ray, out hit))
+                                if (dist <= 3.0f)
                                 {
-                                    if (hit.collider.gameObject.CompareTag("Player") || hit.collider.gameObject.CompareTag("Trooper"))
+                                    //Melee Attack
+                                    Vector3 direction = (nearest.position - transform.position).normalized;
+                                    Ray ray = new Ray(transform.position, direction);
+                                    RaycastHit hit;
+                                    Debug.DrawRay(transform.position, direction, Color.red);
+
+                                    if (Physics.Raycast(ray, out hit))
                                     {
-                                        hit.collider.gameObject.GetComponent<Entity>().Damage(20.0f);
+                                        if (hit.collider.gameObject.CompareTag("Player") || hit.collider.gameObject.CompareTag("Trooper"))
+                                        {
+                                            hit.collider.gameObject.GetComponent<Entity>().Damage(20.0f);
+                                            canAttack = false;
+                                        }
                                     }
                                 }
-
-                                canAttack = false;
                             }
                             else
                             {
                                 atkTimer -= Time.deltaTime;
-                                if (atkTimer < 0.0f)
+                                if (atkTimer <= 0.0f)
                                 {
                                     canAttack = true;
                                     atkTimer = 1.0f;
@@ -119,10 +135,10 @@ public class EnemyChara : Entity
                         else
                         {
                             aiTimer -= Time.deltaTime;
-                            if (aiTimer < 0.0f)
+                            if (aiTimer <= 0.0f)
                             {
                                 isAsleep = true;
-                                aiTimer = 10.0f;
+                                aiTimer = 5.0f;
                             }
                         }
                     }

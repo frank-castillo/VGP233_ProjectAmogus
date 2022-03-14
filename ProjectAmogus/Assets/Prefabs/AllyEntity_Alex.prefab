@@ -164,7 +164,8 @@ GameObject:
   - component: {fileID: 1959367230448396418}
   - component: {fileID: 1959367230448396429}
   - component: {fileID: 1959367230448396428}
-  - component: {fileID: 1959367230448396419}
+  - component: {fileID: 2328999578188571579}
+  - component: {fileID: 1955903440047508193}
   m_Layer: 0
   m_Name: Vision
   m_TagString: Untagged
@@ -235,16 +236,29 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &1959367230448396419
-SphereCollider:
+--- !u!65 &2328999578188571579
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1959367230448396417}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
+  m_IsTrigger: 1
+  m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 20, y: 6, z: 12}
+  m_Center: {x: 5.5, y: -1, z: 0.5}
+--- !u!114 &1955903440047508193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1959367230448396417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: feaff5994ffa354489e0f8136eb92741, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  whatType: 1

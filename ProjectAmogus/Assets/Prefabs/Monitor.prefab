@@ -189,6 +189,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: feaff5994ffa354489e0f8136eb92741, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  whatType: 0
 --- !u!1 &7404574966064755142
 GameObject:
   m_ObjectHideFlags: 0
@@ -205,7 +206,7 @@ GameObject:
   - component: {fileID: 7404574966064755129}
   m_Layer: 0
   m_Name: Monitor
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -319,6 +320,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   priority: 5
   whatType: 5
-  wallMask:
-    serializedVersion: 2
-    m_Bits: 64
