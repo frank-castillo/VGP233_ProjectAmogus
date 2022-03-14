@@ -28,6 +28,10 @@ public class AgentUIManager : MonoBehaviour
     [SerializeField] private EntityUI[] entities;
     int generalOrder = 0;
 
+    // External references
+    //[Header("References")]
+
+
     private static AgentUIManager uIManager;
 
     public static AgentUIManager Instance { get { return uIManager; } }
@@ -42,6 +46,34 @@ public class AgentUIManager : MonoBehaviour
         {
             uIManager = this;
         }
+
+        var allEntities = FindObjectsOfType<PlayerChara>();
+
+        foreach( var entity in allEntities)
+        {
+            foreach(var uiEntity in entities)
+            {
+                if(uiEntity.GetEntityUIType() == TypeOfEntityUI.Scientist && entity.GetType() == EntityType.Scientist)
+                {
+                    uiEntity.SetPlayerCharaReference(entity);
+                }
+                else if(uiEntity.GetEntityUIType() == TypeOfEntityUI.Alex && entity.GetType() == EntityType.TrooperA)
+                {
+                    uiEntity.SetPlayerCharaReference(entity);
+                }
+                else if (uiEntity.GetEntityUIType() == TypeOfEntityUI.Berg && entity.GetType() == EntityType.TrooperB)
+                {
+                    uiEntity.SetPlayerCharaReference(entity);
+                }
+                else if (uiEntity.GetEntityUIType() == TypeOfEntityUI.Cael && entity.GetType() == EntityType.TrooperC)
+                {
+                    uiEntity.SetPlayerCharaReference(entity);
+                }
+            }
+        }
+
+        SetAsActivePlayer(0);
+
     }
 
     private void Start()

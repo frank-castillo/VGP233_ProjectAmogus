@@ -2374,7 +2374,7 @@ RectTransform:
   m_GameObject: {fileID: 4097721270061622667}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4097721270257957842}
   - {fileID: 5865462888325648603}
@@ -3303,6 +3303,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 4097721270061622666}
     m_Modifications:
     - target: {fileID: 1952450959, guid: 1a10b59055b33f14a87544515251f739, type: 3}
+      propertyPath: entityType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1952450959, guid: 1a10b59055b33f14a87544515251f739, type: 3}
       propertyPath: abilityCooldown
       value: 10
       objectReference: {fileID: 0}
@@ -3838,6 +3842,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 4097721270061622666}
     m_Modifications:
     - target: {fileID: 1952450959, guid: 1a10b59055b33f14a87544515251f739, type: 3}
+      propertyPath: entityType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1952450959, guid: 1a10b59055b33f14a87544515251f739, type: 3}
       propertyPath: abilityCooldown
       value: 12
       objectReference: {fileID: 0}
@@ -4356,6 +4364,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4097721270061622666}
     m_Modifications:
+    - target: {fileID: 1952450959, guid: 1a10b59055b33f14a87544515251f739, type: 3}
+      propertyPath: entityType
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1952450959, guid: 1a10b59055b33f14a87544515251f739, type: 3}
       propertyPath: abilityCooldown
       value: 8
@@ -4905,7 +4917,7 @@ PrefabInstance:
       objectReference: {fileID: 4097721270061622668}
     - target: {fileID: 7216881511082734952, guid: 1a10b59055b33f14a87544515251f739, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: SetAllOrdersImages
+      value: SetAllOrdersImagesByClick
       objectReference: {fileID: 0}
     - target: {fileID: 7216881511082734952, guid: 1a10b59055b33f14a87544515251f739, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
@@ -4931,6 +4943,18 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 7617918636050929528, guid: 1a10b59055b33f14a87544515251f739, type: 3}
+      propertyPath: m_Color.a
+      value: 0.039215688
+      objectReference: {fileID: 0}
+    - target: {fileID: 7617918636162419044, guid: 1a10b59055b33f14a87544515251f739, type: 3}
+      propertyPath: m_Value
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7617918636162419044, guid: 1a10b59055b33f14a87544515251f739, type: 3}
+      propertyPath: m_MaxValue
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 7617918636471783550, guid: 1a10b59055b33f14a87544515251f739, type: 3}
       propertyPath: m_TagString
       value: Player
@@ -4949,7 +4973,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7617918636732531252, guid: 1a10b59055b33f14a87544515251f739, type: 3}
       propertyPath: m_Name
-      value: Player
+      value: Scientist
       objectReference: {fileID: 0}
     - target: {fileID: 7617918636732531253, guid: 1a10b59055b33f14a87544515251f739, type: 3}
       propertyPath: m_Pivot.x

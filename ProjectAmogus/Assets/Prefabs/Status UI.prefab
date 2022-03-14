@@ -1193,7 +1193,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8235294, g: 0.8235294, b: 0.8235294, a: 1}
+  m_Color: {r: 0.8235294, g: 0.8235294, b: 0.8235294, a: 0.039215688}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1303,9 +1303,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
+  m_MaxValue: 100
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 100
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1857,7 +1857,10 @@ MonoBehaviour:
   - {fileID: 21300000, guid: a9cb5fc73a9921f4da4a2964c29d42b8, type: 3}
   - {fileID: 21300000, guid: 6be7f5a3cf821924784171eed9a64807, type: 3}
   abilityButton: {fileID: 5206493142806677237}
+  mEntity: {fileID: 0}
   abilityCooldown: 0
+  entityType: 0
+  healthBar: {fileID: 7617918636162419044}
 --- !u!1 &7617918636746187202
 GameObject:
   m_ObjectHideFlags: 0
