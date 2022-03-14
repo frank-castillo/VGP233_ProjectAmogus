@@ -70,7 +70,7 @@ public class Entity : MonoBehaviour
     [SerializeField]private AIPriority priority;
     [SerializeField]protected GameObject originPoint;
     protected NavMeshAgent navMeshAgent;
-
+    public NavMeshAgent GetNavMeshAgent() { return navMeshAgent; }
     private void Awake()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
@@ -80,12 +80,12 @@ public class Entity : MonoBehaviour
         get { return priority; }
         set { priority = value; }
     }
-    private EntityType type; 
+    //private EntityType type; 
     
-    public EntityType Type
-    {
-        get { return type; }
-    }
+    //public EntityType Type
+    //{
+    //    get { return type; }
+    //}
     private StatusMode status;
 
     public StatusMode Status

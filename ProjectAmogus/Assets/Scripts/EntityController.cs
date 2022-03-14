@@ -67,6 +67,7 @@ public class EntityController : MonoBehaviour
             {
                 //movePositionTransform.transform.position = hit.point;
                 navMeshAgent.SetDestination(hit.point);
+                
             }
         }
 
