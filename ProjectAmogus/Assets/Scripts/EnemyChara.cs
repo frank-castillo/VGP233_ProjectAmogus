@@ -5,10 +5,15 @@ using UnityEngine;
 public class EnemyChara : Entity
 {
     [SerializeField] EntityType whatType;
+    bool isAsleep = true;
+
+    Transform playerRef;
 
     // Start is called before the first frame update
     void Start()
     {
+        playerRef = FindObjectOfType<EntityController>().gameObject.transform;
+
         switch(whatType)
         {
             case EntityType.Swarm:
@@ -43,9 +48,33 @@ public class EnemyChara : Entity
         }
     }
 
+    public void WakeEnemyUp()
+    {
+        isAsleep = false;
+    }
+
+    public void MakeEnemySleep()
+    {
+        isAsleep = true;
+    }
+
     // Update is called once per frame
     void Update()
     {
-        
+        if(!isAsleep)
+        {
+            switch (Priority)
+            {
+                case AIPriority.AttackClosest:
+                    if(Vector3.Distance(this.transform.position, playerRef.position) >= 0.0001f)
+                    {
+                        this.transform.position = Vector3.MoveTowards(this.transform.position, playerRef.position, MoveSpeed * Time.deltaTime);
+                    }
+                    break;
+                case AIPriority.AttackPlayer:
+
+                    break;
+            }
+        }
     }
 }
