@@ -5,20 +5,15 @@ using UnityEngine.UI;
 
 public class AgentUIManager : MonoBehaviour
 {
-    public enum SelectedUnit
-    {
-        Player,
-        AgentA,
-        AgentB,
-        AgentC
-    }
-
+    [SerializeField] private Image pictureBorderPlayer;
     [SerializeField] private Image pictureBorderAgentA;
     [SerializeField] private Image pictureBorderAgentB;
     [SerializeField] private Image pictureBorderAgentC;
-    [SerializeField] private Image pictureBorderPlayer;
 
-    private Color defaultColor = new Color(0.3882353f, 0.7764706f, 1.0f, 1.0f);
+    private Color playerColor = new Color(0.8235294f, 0.8235294f, 0.8235294f, 1.0f);
+    private Color alexColor = new Color(0.5450981f, 0.6862745f, 0.9254902f, 1.0f);
+    private Color BergColor = new Color(0.7490196f, 0.7058824f, 0.8509804f, 1.0f);
+    private Color CaelColor = new Color(0.6117647f, 0.7607843f, 0.5450981f, 1.0f);
     private Color selectedColor = new Color(0.07f, 1.0f, 0.0f, 1.0f);
 
     // Start is called before the first frame update
@@ -33,33 +28,33 @@ public class AgentUIManager : MonoBehaviour
         
     }
 
-    public void SetAsActivePlayer(SelectedUnit unit)
+    public void SetAsActivePlayer(int unit)
     {
         switch (unit)
         {
-            case SelectedUnit.Player:
-                pictureBorderAgentA.color = defaultColor;
-                pictureBorderAgentB.color = defaultColor;
-                pictureBorderAgentC.color = defaultColor;
+            case 0:
+                pictureBorderAgentA.color = alexColor;
+                pictureBorderAgentB.color = BergColor;
+                pictureBorderAgentC.color = CaelColor;
                 pictureBorderPlayer.color = selectedColor;
                 break;
-            case SelectedUnit.AgentA:
+            case 1:
                 pictureBorderAgentA.color = selectedColor;
-                pictureBorderAgentB.color = defaultColor;
-                pictureBorderAgentC.color = defaultColor;
-                pictureBorderPlayer.color = defaultColor;
+                pictureBorderAgentB.color = BergColor;
+                pictureBorderAgentC.color = CaelColor;
+                pictureBorderPlayer.color = playerColor;
                 break;
-            case SelectedUnit.AgentB:
-                pictureBorderAgentA.color = defaultColor;
+            case 2:
+                pictureBorderAgentA.color = alexColor;
                 pictureBorderAgentB.color = selectedColor;
-                pictureBorderAgentC.color = defaultColor;
-                pictureBorderPlayer.color = defaultColor;
+                pictureBorderAgentC.color = CaelColor;
+                pictureBorderPlayer.color = playerColor;
                 break;
-            case SelectedUnit.AgentC:
-                pictureBorderAgentA.color = defaultColor;
-                pictureBorderAgentB.color = defaultColor;
+            case 3:
+                pictureBorderAgentA.color = alexColor;
+                pictureBorderAgentB.color = BergColor;
                 pictureBorderAgentC.color = selectedColor;
-                pictureBorderPlayer.color = defaultColor;
+                pictureBorderPlayer.color = playerColor;
                 break;
             default:
                 break;
