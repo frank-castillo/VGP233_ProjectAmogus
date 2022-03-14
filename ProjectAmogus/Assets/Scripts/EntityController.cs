@@ -17,6 +17,7 @@ public class EntityController : MonoBehaviour
     private Transform movePositionTransform;
     private NavMeshAgent navMeshAgent;
 
+    public List<KeyType> keys = new List<KeyType>();
     private void Awake()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
@@ -104,6 +105,18 @@ public class EntityController : MonoBehaviour
 
             point.position = transform.position + originalDirection * distance;
         }
+
+    }
+    public bool HasKey(KeyType keyToSearch)
+    {
+        foreach (var key in keys)
+        {
+            if(keyToSearch==key)
+            {
+                return true;
+            }    
+        }
+        return false;
 
     }
 }
