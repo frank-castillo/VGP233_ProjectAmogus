@@ -1,11 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
+
 
 public class EntityController : MonoBehaviour
 {
     [SerializeField] bool canControl = false;
     Rigidbody targetRB;
+
+    private Transform movePositionTransform;
+    private NavMeshAgent navMeshAgent;
+
+    private void Awake()
+    {
+        navMeshAgent = GetComponent<NavMeshAgent>();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -16,7 +26,7 @@ public class EntityController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(targetRB != null && canControl)
+        if (targetRB != null && canControl)
         {
             if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
             {
@@ -38,5 +48,19 @@ public class EntityController : MonoBehaviour
                 targetRB.AddForce(new Vector3(0.01f, 0.0f, 0.0f), ForceMode.Impulse);
             }
         }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit))
+            {
+                //movePositionTransform.transform.position = hit.point;
+                navMeshAgent.SetDestination(hit.point);
+            }
+        }
+
+     //  navMeshAgent.destination = movePositionTransform.position;
     }
 }

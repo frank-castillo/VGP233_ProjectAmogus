@@ -57,6 +57,31 @@ public class PlayerChara : Entity
     // Update is called once per frame
     void Update()
     {
-        
+
+        switch (Priority)
+        {
+            case AIPriority.None:
+                break;
+            case AIPriority.FollowMe:
+                Follow();
+                break;
+            case AIPriority.WaitHere:
+                break;
+            case AIPriority.SpreadOut:
+                break;
+            case AIPriority.CloseIn:
+                break;
+            case AIPriority.AttackClosest:
+                break;
+            case AIPriority.AttackPlayer:
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void Follow()
+    {
+        navMeshAgent.SetDestination(originPoint.transform.position);
     }
 }
