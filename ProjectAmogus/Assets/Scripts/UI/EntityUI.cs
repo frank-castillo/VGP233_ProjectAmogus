@@ -10,6 +10,7 @@ public class EntityUI : MonoBehaviour
     [SerializeField] private Image orderImage;
     [SerializeField] private Sprite[] ordersImages;
     [SerializeField] private Button abilityButton;
+    [SerializeField] private PlayerChara mEntity;
 
     public float abilityCooldown;
     int activeOrder = 0;
@@ -43,6 +44,22 @@ public class EntityUI : MonoBehaviour
         if (this.tag == "Soldiers")
         {
             orderImage.overrideSprite = ordersImages[activeOrder];
+
+            switch (activeOrder)
+            {
+                case 0:
+                    mEntity.Priority = AIPriority.FollowMe;
+                    break;
+                case 1:
+                    mEntity.Priority = AIPriority.CloseIn;
+                    break;
+                case 2:
+                    mEntity.Priority = AIPriority.SpreadOut;
+                    break;
+                case 3:
+                    mEntity.Priority = AIPriority.WaitHere;
+                    break;
+            }
         }
 
         ++activeOrder;

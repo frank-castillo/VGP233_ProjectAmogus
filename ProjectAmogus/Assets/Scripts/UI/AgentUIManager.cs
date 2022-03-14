@@ -47,7 +47,7 @@ public class AgentUIManager : MonoBehaviour
 
     private void Start()
     {
-        SetAllOrdersImages();
+        SetAllOrdersImagesByClick();
     }
 
     public void SetAsActivePlayer(int unit)
@@ -83,9 +83,80 @@ public class AgentUIManager : MonoBehaviour
         }
     }
 
-    public void SetAllOrdersImages()
+    public void SetAllOrdersImagesByClick()
     {
         if (generalOrder % 4 == 0 || generalOrder > 4) generalOrder = 0;
+
+        switch (generalOrder)
+        {
+            case 0:
+                playerOrder.overrideSprite = orderImage[0];
+                bergOrder.overrideSprite = orderImage[0];
+                caelOrder.overrideSprite = orderImage[0];
+                alexOrder.overrideSprite = orderImage[0];
+                foreach (var unit in UnitManager.units)
+                {
+                    unit.Priority = AIPriority.FollowMe;
+                }
+                break;
+            case 1:
+                playerOrder.overrideSprite = orderImage[1];
+                bergOrder.overrideSprite = orderImage[1];
+                caelOrder.overrideSprite = orderImage[1];
+                alexOrder.overrideSprite = orderImage[1];
+                foreach (var unit in UnitManager.units)
+                {
+                    unit.Priority = AIPriority.CloseIn;
+                }
+                break;
+            case 2:
+                playerOrder.overrideSprite = orderImage[2];
+                bergOrder.overrideSprite = orderImage[2];
+                caelOrder.overrideSprite = orderImage[2];
+                alexOrder.overrideSprite = orderImage[2];
+                foreach (var unit in UnitManager.units)
+                {
+                    unit.Priority = AIPriority.SpreadOut;
+                }
+                break;
+            case 3:
+                playerOrder.overrideSprite = orderImage[3];
+                bergOrder.overrideSprite = orderImage[3];
+                caelOrder.overrideSprite = orderImage[3];
+                alexOrder.overrideSprite = orderImage[3];
+                foreach (var unit in UnitManager.units)
+                {
+                    unit.Priority = AIPriority.WaitHere;
+                }
+                break;
+            default:
+                break;
+        }
+
+        ++generalOrder;
+        foreach (var entity in entities)
+        {
+            entity.SetActiveOrder(generalOrder);
+        }
+    }
+
+    public void SetAllOrdersImagesByKeyboard(AIPriority priority)
+    {
+        switch (priority)
+        {
+            case AIPriority.FollowMe:
+                generalOrder = 0;
+                break;
+            case AIPriority.WaitHere:
+                generalOrder = 1;
+                break;
+            case AIPriority.SpreadOut:
+                generalOrder = 2;
+                break;
+            case AIPriority.CloseIn:
+                generalOrder = 3;
+                break;
+        }
 
         switch (generalOrder)
         {
@@ -111,16 +182,10 @@ public class AgentUIManager : MonoBehaviour
                 playerOrder.overrideSprite = orderImage[3];
                 bergOrder.overrideSprite = orderImage[3];
                 caelOrder.overrideSprite = orderImage[3];
-                alexOrder.overrideSprite = orderImage[3];                
+                alexOrder.overrideSprite = orderImage[3];
                 break;
             default:
                 break;
-        }
-
-        ++generalOrder;
-        foreach (var entity in entities)
-        {
-            entity.SetActiveOrder(generalOrder);
         }
     }
 }
