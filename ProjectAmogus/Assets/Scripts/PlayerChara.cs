@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class PlayerChara : Entity
 {
     [SerializeField] EntityType whatType;
+
     Transform nextWaypoint;
 
     [SerializeField] protected GameObject originPoint;
@@ -68,27 +69,30 @@ public class PlayerChara : Entity
     // Update is called once per frame
     void Update()
     {
-
-        switch (Priority)
+        if (whatType != EntityType.Scientist)
         {
-            case AIPriority.None:
-                break;
-            case AIPriority.FollowMe:
-                Follow();
-                break;
-            case AIPriority.WaitHere:
-                break;
-            case AIPriority.SpreadOut:
-                break;
-            case AIPriority.CloseIn:
-                break;
-            case AIPriority.AttackClosest:
-                break;
-            case AIPriority.AttackPlayer:
-                break;
-            default:
-                break;
+            switch (Priority)
+            {
+                case AIPriority.None:
+                    break;
+                case AIPriority.FollowMe:
+                    Follow();
+                    break;
+                case AIPriority.WaitHere:
+                    break;
+                case AIPriority.SpreadOut:
+                    break;
+                case AIPriority.CloseIn:
+                    break;
+                case AIPriority.AttackClosest:
+                    break;
+                case AIPriority.AttackPlayer:
+                    break;
+                default:
+                    break;
+            }
         }
+      
     }
 
     public void Follow()
@@ -124,6 +128,10 @@ public class PlayerChara : Entity
         }
     }
 
+    public EntityType GetType()
+    {
+        return whatType;
+    }
     private void OnDestroy()
     {
         UnitManager.units.Remove(this);
