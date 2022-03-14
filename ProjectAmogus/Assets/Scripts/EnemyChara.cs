@@ -7,6 +7,8 @@ public class EnemyChara : Entity
     [SerializeField] EntityType whatType;
     bool isAsleep = true;
     float aiTimer = 3.0f;
+    bool canAttack = true;
+    float atkTimer = 1.0f;
 
     Transform playerRef;
 
@@ -62,7 +64,7 @@ public class EnemyChara : Entity
     // Update is called once per frame
     void Update()
     {
-        if(!isAsleep)
+        if (!isAsleep)
         {
             switch (Priority)
             {
@@ -81,14 +83,38 @@ public class EnemyChara : Entity
 
                         var dist = Vector3.Distance(this.transform.position, nearest.position);
 
-                        if (dist > 0.2f && dist < 10.0F)
+                        if (dist > 2.0f && dist < 10.0F)
                         {
                             //Approach
                             this.transform.position = Vector3.MoveTowards(this.transform.position, nearest.position, MoveSpeed * Time.deltaTime);
-                        }
-                        else if (dist <= 0.2f)
-                        {
-                            //Melee Range
+
+                            if (dist <= 3.0f && canAttack)
+                            {
+                                //Melee Attack
+                                Vector3 direction = (nearest.position - transform.position).normalized;
+                                Ray ray = new Ray(transform.position, direction);
+                                RaycastHit hit;
+                                Debug.DrawRay(transform.position, direction, Color.red);
+
+                                if (Physics.Raycast(ray, out hit))
+                                {
+                                    if (hit.collider.gameObject.CompareTag("Player") || hit.collider.gameObject.CompareTag("Trooper"))
+                                    {
+                                        hit.collider.gameObject.GetComponent<Entity>().Damage(20.0f);
+                                    }
+                                }
+
+                                canAttack = false;
+                            }
+                            else
+                            {
+                                atkTimer -= Time.deltaTime;
+                                if (atkTimer < 0.0f)
+                                {
+                                    canAttack = true;
+                                    atkTimer = 1.0f;
+                                }
+                            }
                         }
                         else
                         {
@@ -105,14 +131,14 @@ public class EnemyChara : Entity
                     {
                         var dist = Vector3.Distance(this.transform.position, playerRef.position);
 
-                        if (dist > 0.2f && dist < 10.0F)
+                        if (dist > 1.0f && dist < 10.0F)
                         {
                             //Approach
                             this.transform.position = Vector3.MoveTowards(this.transform.position, playerRef.position, MoveSpeed * Time.deltaTime);
                         }
-                        else if (dist <= 0.2f)
+                        else if (dist <= 1.0f)
                         {
-                            //Melee Range
+                            //Attack Range
                         }
                         else
                         {

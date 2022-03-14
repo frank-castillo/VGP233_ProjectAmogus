@@ -7,62 +7,66 @@ public class PlayerChara : Entity
 {
     [SerializeField] EntityType whatType;
 
-    Transform nextWaypoint;
-
     [SerializeField] protected GameObject originPoint;
-    protected NavMeshAgent navMeshAgent;
+    //protected NavMeshAgent navMeshAgent;
 
     private void Awake()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
-    }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        switch (whatType)
+                switch (whatType)
         {
             case EntityType.Scientist:
                 {
-                    MaxHealth = 100.0f;
-                    Health = MaxHealth;
-                    MoveSpeed = 2.0f;
-                    TurnSpeed = 2.0f;
+                    maxHealth = 100.0f;
+                    health = maxHealth;
+                    moveSpeed = 2.0f;
+                    turnSpeed = 2.0f;
                     Priority = AIPriority.None;
-
                 }
                 break;
             case EntityType.TrooperA:
                 {
-                    MaxHealth = 100.0f;
-                    Health = MaxHealth;
-                    MoveSpeed = 2.0f;
-                    TurnSpeed = 4.0f;
+                    maxHealth = 100.0f;
+                    health = maxHealth;
+                    moveSpeed = 2.0f;
+                    turnSpeed = 4.0f;
                     Priority = AIPriority.FollowMe;
                 }
                 break;
             case EntityType.TrooperB:
                 {
-                    MaxHealth = 100.0f;
-                    Health = MaxHealth;
-                    MoveSpeed = 3.0f;
-                    TurnSpeed = 3.0f;
+                    maxHealth = 100.0f;
+                    health = maxHealth;
+                    moveSpeed = 3.0f;
+                    turnSpeed = 3.0f;
                     Priority = AIPriority.FollowMe;
                 }
                 break;
             case EntityType.TrooperC:
                 {
-                    MaxHealth = 100.0f;
-                    Health = MaxHealth;
-                    MoveSpeed = 4.0f;
-                    TurnSpeed = 2.0f;
+                    maxHealth = 100.0f;
+                    health = maxHealth;
+                    moveSpeed = 4.0f;
+                    turnSpeed = 2.0f;
                     Priority = AIPriority.FollowMe;
                 }
                 break;
             default:
+                {
+                    maxHealth = 100.0f;
+                    health = maxHealth;
+                    moveSpeed = 2.0f;
+                    turnSpeed = 2.0f;
+                    Priority = AIPriority.None;
+                }
                 break;
         }
+    }
 
+    // Start is called before the first frame update
+    void Start()
+    {
         UnitManager.units.Add(this);
     }
 
