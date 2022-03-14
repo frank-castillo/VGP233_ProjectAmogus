@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 //This Class is going to be an abstract class which has the variables that all Entities have
 
@@ -68,13 +67,7 @@ public class Entity : MonoBehaviour
     }
 
     [SerializeField]private AIPriority priority;
-    [SerializeField]protected GameObject originPoint;
-    protected NavMeshAgent navMeshAgent;
 
-    private void Awake()
-    {
-        navMeshAgent = GetComponent<NavMeshAgent>();
-    }
     public AIPriority Priority
     {
         get { return priority; }

@@ -70,9 +70,6 @@ public class EntityController : MonoBehaviour
             }
         }
 
-
-
-
         //  navMeshAgent.destination = movePositionTransform.position;
     }
 
