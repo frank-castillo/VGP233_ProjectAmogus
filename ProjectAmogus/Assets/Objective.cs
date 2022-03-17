@@ -7,14 +7,14 @@ public enum ObjectiveEvent
     YellowDoorOpened, 
     OrangeDoorOpenned,
     PinkDoorOpenned,
-    YelloKeyPickedUp,
-    OrangeKeyPickepUp,
+    YellowKeyPickedUp,
+    OrangeKeyPickedUp,
     PinkKeyPickedUp
 }
 [System.Serializable]
 public class Objective 
 {
-    public ObjectiveEvent objectiveEvent;
+    public ObjectiveEvent destroyCondition;
     public string text = string.Empty;
     
 

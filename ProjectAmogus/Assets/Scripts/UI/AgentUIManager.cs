@@ -241,9 +241,11 @@ public class AgentUIManager : MonoBehaviour
         foreach(var prefab in objectives)
         {
             var objective = prefab.GetComponent<ObjectiveTemplate>();
-            if(objective.objectiveEventType.objectiveEvent == objectiveEvent)
+            if(objective.objectiveEventType.destroyCondition == objectiveEvent)
             {
+                objectives.Remove(prefab);
                 Destroy(prefab);
+                return;
             }
         }
     }

@@ -7,6 +7,7 @@ public class Door : MonoBehaviour
 
     public KeyType keyRequired;
     public Objective objective;
+    public List<ObjectiveEvent> objectivesToDelteOnceItOppened = new List<ObjectiveEvent>();
     private void OnTriggerEnter(Collider other)
     {
         if(other.GetComponent<EntityController>() !=null)
@@ -18,7 +19,11 @@ public class Door : MonoBehaviour
                 //open door
                 player.keys.Remove(keyRequired);
                 this.gameObject.SetActive(false);
-                AgentUIManager.Instance.DeleteObjective(objective.objectiveEvent);
+                foreach(var x in objectivesToDelteOnceItOppened)
+                {
+                AgentUIManager.Instance.DeleteObjective(x);
+                }
+
             }
             else
             {

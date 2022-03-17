@@ -13,6 +13,7 @@ public class Key : MonoBehaviour
 {
     public KeyType type;
     public Objective objective;
+    public ObjectiveEvent whatHappenedWhenPickedUp;
     private void OnTriggerEnter(Collider other)
     {
         if (other.GetComponent<EntityController>() != null)
@@ -23,8 +24,9 @@ public class Key : MonoBehaviour
             //Add objective to open the door
             Debug.Log(type.ToString() + " was picked up!.");
             //Debug.Log("Objective Added: "+ objective.text);
-            AgentUIManager.Instance.DeleteObjective(objective.objectiveEvent);
+            AgentUIManager.Instance.DeleteObjective(whatHappenedWhenPickedUp);
             AgentUIManager.Instance.AddNewObjective(objective);
+
             Destroy(this.gameObject);
         }
     }
