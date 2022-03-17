@@ -16,6 +16,10 @@ public class PlayerChara : Entity
     float atkTimer = 3.0f;
     Transform attackTarget;
 
+    Quaternion pivotAngle = Quaternion.Euler(new Vector3(0.0f, 0.0f, 0.0f));
+    bool lookLeft = false;
+    float timeCount = 0.5f;
+
     private void Awake()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
@@ -116,7 +120,18 @@ public class PlayerChara : Entity
 
         if(!enemyFound)
         {
+            transform.rotation = Quaternion.Slerp(Quaternion.Euler(0.0f, pivotAngle.y -22.5f, 0.0f), Quaternion.Euler(0.0f, pivotAngle.y + 22.5f, 0.0f), timeCount);
 
+            if (lookLeft)
+            {
+                timeCount -= turnSpeed * Time.deltaTime * 0.1f;
+                if (timeCount <= 0.0f) lookLeft = false;
+            }
+            else
+            {
+                timeCount += turnSpeed * Time.deltaTime * 0.1f;
+                if (timeCount >= 1.0f) lookLeft = true;
+            }
         }
         else
         {
@@ -131,7 +146,7 @@ public class PlayerChara : Entity
                 {
                     if (hit.collider.gameObject.CompareTag("Enemy"))
                     {
-                        hit.collider.gameObject.GetComponent<Entity>().Damage(25.0f);
+                        hit.collider.gameObject.GetComponent<Entity>().Damage(20.0f);
                         if (hit.collider.gameObject.GetComponent<Entity>().Status == StatusMode.Downed)
                         {
                             enemyFound = false;
@@ -157,6 +172,7 @@ public class PlayerChara : Entity
     public void Follow()
     {
         navMeshAgent.SetDestination(originPoint.transform.position);
+        pivotAngle = Quaternion.Euler((originPoint.transform.position - transform.position).normalized);
     }
 
     public void SetPriority(string newPriority)

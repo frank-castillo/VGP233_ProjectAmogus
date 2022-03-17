@@ -106,7 +106,7 @@ public class Entity : MonoBehaviour
         Debug.Log(this.gameObject.name + "is Stunned!");
     }
 
-    public void SetHealth()
+    public void SetHealthy()
     {
         status = StatusMode.Healthy;
     }

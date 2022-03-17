@@ -229,6 +229,15 @@ public class AgentUIManager : MonoBehaviour
 
     public void AddNewObjective(Objective objective)
     {
+        if(objective.isObjectiveSent==false)
+        {
+            objective.isObjectiveSent = true;
+        }
+        else
+        {
+            return;
+        }
+
         var temp = Instantiate(objectivePrefab);
         temp.transform.SetParent(objectivesContainer.transform);
         objectives.Add(temp);
