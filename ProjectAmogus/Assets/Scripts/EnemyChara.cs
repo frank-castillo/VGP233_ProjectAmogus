@@ -21,7 +21,7 @@ public class EnemyChara : Entity
         {
             case EntityType.Swarm:
                 {
-                    MaxHealth = 40.0f;
+                    MaxHealth = 60.0f;
                     Health = MaxHealth;
                     MoveSpeed = 2.0f;
                     TurnSpeed = 2.0f;
@@ -30,7 +30,7 @@ public class EnemyChara : Entity
                 break;
             case EntityType.Monitor:
                 {
-                    MaxHealth = 120.0f;
+                    MaxHealth = 180.0f;
                     Health = MaxHealth;
                     MoveSpeed = 4.0f;
                     TurnSpeed = 4.0f;
@@ -39,7 +39,7 @@ public class EnemyChara : Entity
                 break;
             case EntityType.SuperMonitor:
                 {
-                    MaxHealth = 250.0f;
+                    MaxHealth = 300.0f;
                     Health = MaxHealth;
                     MoveSpeed = 4.0f;
                     TurnSpeed = 4.0f;
@@ -175,6 +175,11 @@ public class EnemyChara : Entity
                     }
                     break;
             }
+        }
+        else
+        {
+            //Dither Movement
+
         }
     }
 }
