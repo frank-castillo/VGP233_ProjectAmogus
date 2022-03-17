@@ -18,6 +18,7 @@ public class PlayerChara : Entity
     bool canAttack = true;
     float atkTimer = 3.0f;
     Transform attackTarget;
+    Vector3 attackDestination = new Vector3();
 
     Quaternion pivotAngle = Quaternion.Euler(new Vector3(0.0f, 0.0f, 0.0f));
     bool lookLeft = false;
@@ -165,6 +166,7 @@ public class PlayerChara : Entity
                 if (canAttack && attackTarget != null)
                 {
                     Vector3 direction = (attackTarget.transform.position - transform.position).normalized;
+                    attackDestination = attackTarget.transform.position;
                     Ray ray = new Ray(transform.position, direction);
                     RaycastHit hit;
                     Debug.DrawRay(transform.position, direction, Color.blue);
@@ -173,19 +175,19 @@ public class PlayerChara : Entity
                     {
                         if (hit.collider.gameObject.CompareTag("Enemy"))
                         {
+                            if (bulletPFXfab != null)
+                            {
+                                var blltPFX = Instantiate(bulletPFXfab);
+                                blltPFX.transform.position = this.transform.position;
+                                if (blltPFX != null) blltPFX.GetComponent<ShotMove>().originPoint = this.transform.position;
+                                if (blltPFX != null) blltPFX.GetComponent<ShotMove>().destination = attackDestination;
+                            }
+
                             hit.collider.gameObject.GetComponent<Entity>().Damage(20.0f);
                             if (hit.collider.gameObject.GetComponent<Entity>().Status == StatusMode.Downed)
                             {
                                 enemyFound = false;
                                 attackTarget = null;
-
-                                if (bulletPFXfab != null)
-                                {
-                                    var blltPFX = Instantiate(bulletPFXfab);
-                                    blltPFX.transform.position = this.transform.position;
-                                    blltPFX.GetComponent<ShotMove>().originPoint = this.transform.position;
-                                    blltPFX.GetComponent<ShotMove>().destination = attackTarget.transform.position;
-                                }
                             }
                             canAttack = false;
                         }
@@ -197,7 +199,7 @@ public class PlayerChara : Entity
                     if (atkTimer <= 0.0f)
                     {
                         canAttack = true;
-                        atkTimer = 3.0;
+                        atkTimer = 3.0f;
                     }
 
                 }
