@@ -184,13 +184,13 @@ public class AgentUIManager : MonoBehaviour
                 generalOrder = 0;
                 break;
             case AIPriority.WaitHere:
-                generalOrder = 1;
+                generalOrder = 3;
                 break;
             case AIPriority.SpreadOut:
                 generalOrder = 2;
                 break;
             case AIPriority.CloseIn:
-                generalOrder = 3;
+                generalOrder = 1;
                 break;
         }
 
