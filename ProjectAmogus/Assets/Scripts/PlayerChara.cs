@@ -197,7 +197,7 @@ public class PlayerChara : Entity
                     if (atkTimer <= 0.0f)
                     {
                         canAttack = true;
-                        atkTimer = 1.5f;
+                        atkTimer = 3.0;
                     }
 
                 }
