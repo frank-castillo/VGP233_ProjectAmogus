@@ -116,6 +116,7 @@ public class PlayerChara : Entity
     {
         if (this.status != StatusMode.Downed)
         {
+            HealBonus();
             if (whatType != EntityType.Scientist)
             {
                 switch (Priority)
@@ -163,6 +164,7 @@ public class PlayerChara : Entity
             }
             else
             {
+                ResetCombatStatus();
                 if (canAttack && attackTarget != null)
                 {
                     Vector3 direction = (attackTarget.transform.position - transform.position).normalized;
@@ -250,4 +252,6 @@ public class PlayerChara : Entity
     {
         UnitManager.units.Remove(this);
     }
+
+   
 }

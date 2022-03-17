@@ -37,7 +37,12 @@ public enum StatusMode
 public class Entity : MonoBehaviour
 {
     protected float health;
-    
+    [SerializeField] protected float inCombatTime=12;
+    private float timer = 0;
+    private bool inCombat = false;
+
+    [SerializeField] protected float healFrequency = 1.0f;
+    private float healtTimer;
     public float Health
     {
         get { return health; }
@@ -71,6 +76,11 @@ public class Entity : MonoBehaviour
     //[SerializeField]protected GameObject originPoint;
     protected NavMeshAgent navMeshAgent;
     public NavMeshAgent GetNavMeshAgent() { return navMeshAgent; }
+    private void Update()
+    {
+        
+  
+    }
     private void Awake()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
@@ -113,6 +123,9 @@ public class Entity : MonoBehaviour
 
     public virtual void Damage(float value)
     {
+        inCombat = true;
+        timer = 0;
+
         health -= value;
         Debug.Log(this.gameObject.name + "took " + value + " DMG!");
         if (health <= 0.0f)
@@ -129,5 +142,33 @@ public class Entity : MonoBehaviour
         {
             health = maxHealth;
         }
+    }
+
+    public void HealBonus()
+    {
+        if (inCombat)
+        {
+            timer += Time.deltaTime;
+            if (timer >= inCombatTime)
+            {
+                inCombat = false;
+                timer = 0;
+            }
+        }
+        else
+        {
+            healtTimer += Time.deltaTime;
+            if (healtTimer >= healFrequency)
+            {
+                Heal(1.0f);
+                healtTimer = 0;
+                //Debug.Log("Unit was healed");
+            }
+        }
+    }
+    public void ResetCombatStatus()
+    {
+        inCombat = true;
+        timer = 0;
     }
 }
