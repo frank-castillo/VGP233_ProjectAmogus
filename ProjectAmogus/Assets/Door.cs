@@ -18,9 +18,11 @@ public class Door : MonoBehaviour
                 //open door
                 player.keys.Remove(keyRequired);
                 this.gameObject.SetActive(false);
+                AgentUIManager.Instance.DeleteObjective(objective.objectiveEvent);
             }
             else
             {
+                AgentUIManager.Instance.AddNewObjective(objective);
                 // Add objective
                 Debug.Log(objective.text);
             }

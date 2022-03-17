@@ -22,9 +22,10 @@ public class Key : MonoBehaviour
             player.keys.Add(type);
             //Add objective to open the door
             Debug.Log(type.ToString() + " was picked up!.");
-            Debug.Log("Objective Added: "+ objective.text);
+            //Debug.Log("Objective Added: "+ objective.text);
+            AgentUIManager.Instance.DeleteObjective(objective.objectiveEvent);
+            AgentUIManager.Instance.AddNewObjective(objective);
             Destroy(this.gameObject);
-
         }
     }
 }

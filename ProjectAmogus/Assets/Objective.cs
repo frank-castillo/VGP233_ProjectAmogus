@@ -15,7 +15,7 @@ public enum ObjectiveEvent
 public class Objective 
 {
     public ObjectiveEvent objectiveEvent;
-    public string text=string.Empty;
+    public string text = string.Empty;
     
 
 }

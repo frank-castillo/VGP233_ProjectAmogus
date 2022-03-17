@@ -74,6 +74,7 @@ public class EntityUI : MonoBehaviour
                     break;
                 case 2:
                     characterReference.Priority = AIPriority.SpreadOut;
+                    AgentUIManager.Instance.GetUnitManager().SetIndividualSpreadOut(characterReference.GetNavMeshAgent());
                     break;
                 case 3:
                     characterReference.Priority = AIPriority.WaitHere;
