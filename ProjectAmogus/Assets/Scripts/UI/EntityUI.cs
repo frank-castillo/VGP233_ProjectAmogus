@@ -3,6 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum TypeOfEntityUI
+{
+    Scientist,
+    Alex,
+    Berg,
+    Cael
+}
+
 public class EntityUI : MonoBehaviour
 {
     [SerializeField] private Image abilityImage;
@@ -10,11 +18,16 @@ public class EntityUI : MonoBehaviour
     [SerializeField] private Image orderImage;
     [SerializeField] private Sprite[] ordersImages;
     [SerializeField] private Button abilityButton;
-    [SerializeField] private PlayerChara mEntity;
 
     public float abilityCooldown;
     int activeOrder = 0;
     bool isCooldown;
+
+    // ReferencesLogic
+    [Header("References Logic")]
+    [SerializeField] private TypeOfEntityUI entityType;
+    private PlayerChara characterReference;
+    [SerializeField] private Slider healthBar;
 
     // Update is called once per frame
     void Update()
@@ -29,7 +42,13 @@ public class EntityUI : MonoBehaviour
                 cooldownImage.fillAmount = 0.0f;
             }
         }
+
+        healthBar.value = characterReference.Health;
     }
+
+    public TypeOfEntityUI GetEntityUIType() { return entityType; }
+
+    public void SetPlayerCharaReference(PlayerChara character) { characterReference = character; }
 
     public void UseAbility()
     {
@@ -48,16 +67,17 @@ public class EntityUI : MonoBehaviour
             switch (activeOrder)
             {
                 case 0:
-                    mEntity.Priority = AIPriority.FollowMe;
+                    characterReference.Priority = AIPriority.FollowMe;
                     break;
                 case 1:
-                    mEntity.Priority = AIPriority.CloseIn;
+                    characterReference.Priority = AIPriority.CloseIn;
                     break;
                 case 2:
-                    mEntity.Priority = AIPriority.SpreadOut;
+                    characterReference.Priority = AIPriority.SpreadOut;
+                    AgentUIManager.Instance.GetUnitManager().SetIndividualSpreadOut(characterReference.GetNavMeshAgent());
                     break;
                 case 3:
-                    mEntity.Priority = AIPriority.WaitHere;
+                    characterReference.Priority = AIPriority.WaitHere;
                     break;
             }
         }

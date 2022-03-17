@@ -28,6 +28,15 @@ public class AgentUIManager : MonoBehaviour
     [SerializeField] private EntityUI[] entities;
     int generalOrder = 0;
 
+    // Objectives Logic
+    [SerializeField] private List<GameObject> objectives = new List<GameObject>();
+    [SerializeField] private GameObject objectivesContainer;
+    [SerializeField] private GameObject objectivePrefab;
+
+    // External references
+    //[Header("References")]
+    [SerializeField] private UnitManager unitManager;
+
     private static AgentUIManager uIManager;
 
     public static AgentUIManager Instance { get { return uIManager; } }
@@ -42,6 +51,34 @@ public class AgentUIManager : MonoBehaviour
         {
             uIManager = this;
         }
+
+        var allEntities = FindObjectsOfType<PlayerChara>();
+
+        foreach (var entity in allEntities)
+        {
+            foreach (var uiEntity in entities)
+            {
+                if (uiEntity.GetEntityUIType() == TypeOfEntityUI.Scientist && entity.GetType() == EntityType.Scientist)
+                {
+                    uiEntity.SetPlayerCharaReference(entity);
+                }
+                else if (uiEntity.GetEntityUIType() == TypeOfEntityUI.Alex && entity.GetType() == EntityType.TrooperA)
+                {
+                    uiEntity.SetPlayerCharaReference(entity);
+                }
+                else if (uiEntity.GetEntityUIType() == TypeOfEntityUI.Berg && entity.GetType() == EntityType.TrooperB)
+                {
+                    uiEntity.SetPlayerCharaReference(entity);
+                }
+                else if (uiEntity.GetEntityUIType() == TypeOfEntityUI.Cael && entity.GetType() == EntityType.TrooperC)
+                {
+                    uiEntity.SetPlayerCharaReference(entity);
+                }
+            }
+        }
+
+        SetAsActivePlayer(0);
+
     }
 
     private void Start()
@@ -185,6 +222,31 @@ public class AgentUIManager : MonoBehaviour
                 break;
             default:
                 break;
+        }
+    }
+
+    public UnitManager GetUnitManager() { return unitManager; }
+
+    public void AddNewObjective(Objective objective)
+    {
+        var temp = Instantiate(objectivePrefab);
+        temp.transform.SetParent(objectivesContainer.transform);
+        objectives.Add(temp);
+        temp.GetComponent<ObjectiveTemplate>().objectiveText.text = objective.text;
+        temp.GetComponent<ObjectiveTemplate>().objectiveEventType = objective;
+    }
+
+    public void DeleteObjective(ObjectiveEvent objectiveEvent)
+    {
+        foreach(var prefab in objectives)
+        {
+            var objective = prefab.GetComponent<ObjectiveTemplate>();
+            if(objective.objectiveEventType.destroyCondition == objectiveEvent)
+            {
+                objectives.Remove(prefab);
+                Destroy(prefab);
+                return;
+            }
         }
     }
 }

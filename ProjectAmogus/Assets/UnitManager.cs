@@ -19,6 +19,7 @@ public class UnitManager : MonoBehaviour
             {
                 unit.Priority = AIPriority.FollowMe;
             }
+            AgentUIManager.Instance.SetAllOrdersImagesByKeyboard(AIPriority.FollowMe);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
@@ -26,7 +27,7 @@ public class UnitManager : MonoBehaviour
             {
                 unit.Priority = AIPriority.WaitHere;
             }
-
+            AgentUIManager.Instance.SetAllOrdersImagesByKeyboard(AIPriority.WaitHere);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
@@ -39,7 +40,7 @@ public class UnitManager : MonoBehaviour
                     ChooseTarget(unit.GetNavMeshAgent());
                 }
             }
-
+            AgentUIManager.Instance.SetAllOrdersImagesByKeyboard(AIPriority.SpreadOut);
 
         }
         else if (Input.GetKeyDown(KeyCode.Alpha4))
@@ -48,12 +49,11 @@ public class UnitManager : MonoBehaviour
             {
                 unit.Priority = AIPriority.CloseIn;
             }
-
+            AgentUIManager.Instance.SetAllOrdersImagesByKeyboard(AIPriority.CloseIn);
         }
         //====================== 
     }
 
- 
     public void ChooseTarget(NavMeshAgent agent)
     {
         RoomPoint closestTarget = null;
@@ -111,5 +111,9 @@ public class UnitManager : MonoBehaviour
         }
     }
 
-   
+    public void SetIndividualSpreadOut(NavMeshAgent agent)
+    {
+        ResetRoomsPointSelection();
+        ChooseTarget(agent);
+    }
 }
