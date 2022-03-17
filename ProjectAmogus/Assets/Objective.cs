@@ -16,6 +16,7 @@ public class Objective
 {
     public ObjectiveEvent destroyCondition;
     public string text = string.Empty;
-    
+    public bool isObjectiveSent = false;
+
 
 }

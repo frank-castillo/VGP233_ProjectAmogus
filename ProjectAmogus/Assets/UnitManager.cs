@@ -61,7 +61,7 @@ public class UnitManager : MonoBehaviour
         NavMeshPath Path = null;
         NavMeshPath ShortestPath = null;
 
-
+        agent.isStopped = false;
         for (int i = 0; i < points.Count; ++i)
         {
             if (points[i] == null || points[i].isVisited == true || points[i].isSelected == true)
