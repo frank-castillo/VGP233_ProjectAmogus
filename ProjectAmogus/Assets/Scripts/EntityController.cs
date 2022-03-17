@@ -43,6 +43,7 @@ public class EntityController : MonoBehaviour
     {
         if (targetRB != null && canControl)
         {
+            /*
             if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
             {
                 targetRB.AddForce(new Vector3(0.0f, 0.0f, 0.01f), ForceMode.Impulse);
@@ -62,6 +63,7 @@ public class EntityController : MonoBehaviour
             {
                 targetRB.AddForce(new Vector3(0.01f, 0.0f, 0.0f), ForceMode.Impulse);
             }
+            */
         }
 
         if (Input.GetMouseButtonDown(1))

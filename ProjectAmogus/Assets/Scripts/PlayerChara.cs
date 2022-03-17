@@ -9,6 +9,7 @@ public class PlayerChara : Entity
 
     [SerializeField] protected GameObject originPoint;
     [SerializeField] protected GameObject closeInPoint;
+    [SerializeField] GameObject bulletPFXfab;
 
     //protected NavMeshAgent navMeshAgent;
 
@@ -177,6 +178,14 @@ public class PlayerChara : Entity
                             {
                                 enemyFound = false;
                                 attackTarget = null;
+
+                                if (bulletPFXfab != null)
+                                {
+                                    var blltPFX = Instantiate(bulletPFXfab);
+                                    blltPFX.transform.position = this.transform.position;
+                                    blltPFX.GetComponent<ShotMove>().originPoint = this.transform.position;
+                                    blltPFX.GetComponent<ShotMove>().destination = attackTarget.transform.position;
+                                }
                             }
                             canAttack = false;
                         }

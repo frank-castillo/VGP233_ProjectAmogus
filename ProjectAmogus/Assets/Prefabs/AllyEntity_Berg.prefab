@@ -241,6 +241,7 @@ MonoBehaviour:
   whatType: 2
   originPoint: {fileID: 0}
   closeInPoint: {fileID: 0}
+  bulletPFXfab: {fileID: 1212465260961673133, guid: 4cb159c17b16fe14e9321bc0e9ed50cc, type: 3}
 --- !u!195 &5758648938532441436
 NavMeshAgent:
   m_ObjectHideFlags: 0
