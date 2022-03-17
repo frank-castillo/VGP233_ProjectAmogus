@@ -197,6 +197,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectiveText: {fileID: 391104696805610548}
+  objectiveEventType:
+    destroyCondition: 0
+    text: 
 --- !u!1 &391104696805610545
 GameObject:
   m_ObjectHideFlags: 0
@@ -208,7 +211,6 @@ GameObject:
   - component: {fileID: 391104696805610546}
   - component: {fileID: 391104696805610549}
   - component: {fileID: 391104696805610548}
-  - component: {fileID: 391104696805610547}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -273,8 +275,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294952547
-  m_fontColor: {r: 0.3882353, g: 0.7764706, b: 1, a: 1}
+    rgba: 4278255403
+  m_fontColor: {r: 0.16862746, g: 1, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -291,8 +293,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 25
-  m_fontSizeBase: 25
+  m_fontSize: 32
+  m_fontSizeBase: 32
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -333,21 +335,3 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &391104696805610547
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 391104696805610545}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e53da8c190fcc64693a9a03b09347e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  UIManagerAsset: {fileID: 11400000, guid: ed935159a86a1be4cbc1c44848b24daf, type: 2}
-  textObject: {fileID: 391104696805610548}
-  keepAlphaValue: 0
-  useCustomColor: 0
-  colorType: 0
-  fontType: 2

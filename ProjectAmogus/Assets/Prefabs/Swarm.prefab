@@ -129,6 +129,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   priority: 4
   whatType: 4
+  projectilePrefab: {fileID: 7182739298151399658, guid: bc971512b43884147a910b55e7814070, type: 3}
+  explosionPrefab: {fileID: 6923004230857307463, guid: ee9b59a6ec9a607409a7a8587a14b4eb, type: 3}
 --- !u!1 &2821175383672901764
 GameObject:
   m_ObjectHideFlags: 0
@@ -223,7 +225,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 10
+  m_Radius: 12
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2821175383672901761
 MonoBehaviour:
@@ -237,4 +239,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: feaff5994ffa354489e0f8136eb92741, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  whatType: 4
