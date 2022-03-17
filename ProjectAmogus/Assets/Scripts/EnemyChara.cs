@@ -7,6 +7,8 @@ public class EnemyChara : Entity
     [SerializeField] EntityType whatType;
     [SerializeField] GameObject projectilePrefab;
     [SerializeField] GameObject explosionPrefab;
+    [SerializeField] AudioClip slashyslashSlash;
+
     bool isAsleep = true;
     float aiTimer = 5.0f;
     bool canAttack = true;
@@ -23,7 +25,7 @@ public class EnemyChara : Entity
     {
         playerRef = FindObjectOfType<EntityController>().gameObject.transform;
 
-        switch(whatType)
+        switch (whatType)
         {
             case EntityType.Swarm:
                 {
@@ -116,7 +118,7 @@ public class EnemyChara : Entity
 
             if (canAttack)
             {
-                if (dist <= 3.0f)   
+                if (dist <= 3.0f)
                 {
                     //Melee Attack
                     Vector3 direction = (nearest.position - transform.position).normalized;
@@ -132,6 +134,14 @@ public class EnemyChara : Entity
                             {
                                 var projPFX = Instantiate(projectilePrefab);
                                 projPFX.transform.position = hit.collider.gameObject.transform.position;
+
+                                if (slashyslashSlash != null)
+                                {
+                                    var audioSource = FindObjectOfType<AudioSource>();
+                                    if (audioSource != null) audioSource.PlayOneShot(slashyslashSlash);
+
+
+                                }
                             }
 
                             hit.collider.gameObject.GetComponent<Entity>().Damage(10.0f);
@@ -236,16 +246,16 @@ public class EnemyChara : Entity
         }
         else
         {
-            if(canDither)
+            if (canDither)
             {
                 this.transform.Translate(new Vector3(moveDir.x, 0.0f, moveDir.y) * moveSpeed * Time.deltaTime);
             }
 
             //Dither Movement
             ditherTimer -= Time.deltaTime;
-            if(ditherTimer < 0.0f)
+            if (ditherTimer < 0.0f)
             {
-                moveDir =  Random.insideUnitSphere;
+                moveDir = Random.insideUnitSphere;
                 ditherTimer = Random.Range(0.1f, 0.2f);
                 canDither = !canDither;
             }

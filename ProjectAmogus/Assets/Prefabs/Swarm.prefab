@@ -127,10 +127,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a1f4dcfc1bedb8459d74a32fe641ebb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inCombatTime: 12
+  healFrequency: 1
   priority: 4
   whatType: 4
   projectilePrefab: {fileID: 7182739298151399658, guid: bc971512b43884147a910b55e7814070, type: 3}
   explosionPrefab: {fileID: 6923004230857307463, guid: ee9b59a6ec9a607409a7a8587a14b4eb, type: 3}
+  slashyslashSlash: {fileID: 8300000, guid: 3a0bf6f3cf025fa4fb62f2447f18217f, type: 3}
 --- !u!1 &2821175383672901764
 GameObject:
   m_ObjectHideFlags: 0

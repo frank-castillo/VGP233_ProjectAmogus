@@ -9,6 +9,7 @@ public class PlayerChara : Entity
 
     [SerializeField] protected GameObject originPoint;
     [SerializeField] protected GameObject closeInPoint;
+    [SerializeField] AudioClip shootyBangBang;
     [SerializeField] GameObject bulletPFXfab;
 
     //protected NavMeshAgent navMeshAgent;
@@ -168,6 +169,9 @@ public class PlayerChara : Entity
                 if (canAttack && attackTarget != null)
                 {
                     Vector3 direction = (attackTarget.transform.position - transform.position).normalized;
+
+                    transform.LookAt(direction + new Vector3(-90.0f, 0.0f, 0.0f));
+
                     attackDestination = attackTarget.transform.position;
                     Ray ray = new Ray(transform.position, direction);
                     RaycastHit hit;
@@ -183,6 +187,12 @@ public class PlayerChara : Entity
                                 blltPFX.transform.position = this.transform.position;
                                 if (blltPFX != null) blltPFX.GetComponent<ShotMove>().originPoint = this.transform.position;
                                 if (blltPFX != null) blltPFX.GetComponent<ShotMove>().destination = attackDestination;
+                            }
+
+                            if(shootyBangBang != null)
+                            {
+                                var audioSource = FindObjectOfType<AudioSource>();
+                                if (audioSource != null) audioSource.PlayOneShot(shootyBangBang);
                             }
 
                             hit.collider.gameObject.GetComponent<Entity>().Damage(20.0f);
