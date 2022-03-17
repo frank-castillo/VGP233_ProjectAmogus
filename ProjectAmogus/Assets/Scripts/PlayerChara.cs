@@ -8,6 +8,8 @@ public class PlayerChara : Entity
     [SerializeField] EntityType whatType;
 
     [SerializeField] protected GameObject originPoint;
+    [SerializeField] protected GameObject closeInPoint;
+
     //protected NavMeshAgent navMeshAgent;
 
     bool enemyFound = false;
@@ -79,7 +81,23 @@ public class PlayerChara : Entity
         enemyFound = true;
         attackTarget = target;
     }
+    public void WaitHere()
+    {
+        navMeshAgent.isStopped = true;
+    }
+    public void CloseIn()
+    {
+        navMeshAgent.isStopped = false;
+        navMeshAgent.SetDestination(closeInPoint.transform.position);
+       pivotAngle = Quaternion.Euler((closeInPoint.transform.position - transform.position).normalized);
 
+        //if(navMeshAgent.remainingDistance<=navMeshAgent.stoppingDistance)
+        //{
+        //    navMeshAgent.angularSpeed = 0;
+        //    pivotAngle = Quaternion.LookRotation((UnitManager.units.Find(x => x.whatType == EntityType.Scientist).transform.forward ),navMeshAgent.transform.forward);
+
+        //}
+    }
     public void EnemyLost()
     {
         enemyFound = false;
@@ -94,83 +112,93 @@ public class PlayerChara : Entity
     // Update is called once per frame
     void Update()
     {
-        if (whatType != EntityType.Scientist)
+        if (this.status != StatusMode.Downed)
         {
-            switch (Priority)
+            if (whatType != EntityType.Scientist)
             {
-                case AIPriority.None:
-                    break;
-                case AIPriority.FollowMe:
-                    Follow();
-                    break;
-                case AIPriority.WaitHere:
-                    break;
-                case AIPriority.SpreadOut:
-                    break;
-                case AIPriority.CloseIn:
-                    break;
-                case AIPriority.AttackClosest:
-                    break;
-                case AIPriority.AttackPlayer:
-                    break;
-                default:
-                    break;
+                switch (Priority)
+                {
+                    case AIPriority.None:
+                        break;
+                    case AIPriority.FollowMe:
+                        Follow();
+                        break;
+                    case AIPriority.WaitHere:
+                        WaitHere();
+                        break;
+                    case AIPriority.SpreadOut:
+                        break;
+                    case AIPriority.CloseIn:
+                        CloseIn();
+                        break;
+                    case AIPriority.AttackClosest:
+                        break;
+                    case AIPriority.AttackPlayer:
+                        break;
+                    default:
+                        break;
+                }
             }
-        }
 
-        if(!enemyFound)
-        {
-            transform.rotation = Quaternion.Slerp(Quaternion.Euler(0.0f, pivotAngle.y -22.5f, 0.0f), Quaternion.Euler(0.0f, pivotAngle.y + 22.5f, 0.0f), timeCount);
-
-            if (lookLeft)
+            if (!enemyFound && Priority!=AIPriority.CloseIn)
             {
-                timeCount -= turnSpeed * Time.deltaTime * 0.1f;
-                if (timeCount <= 0.0f) lookLeft = false;
+                if(whatType != EntityType.Scientist)
+                {
+                transform.rotation = Quaternion.Slerp(Quaternion.Euler(0.0f, pivotAngle.y - 22.5f, 0.0f), Quaternion.Euler(0.0f, pivotAngle.y + 22.5f, 0.0f), timeCount);
+                
+
+                if (lookLeft)
+                {
+                    timeCount -= turnSpeed * Time.deltaTime * 0.1f;
+                    if (timeCount <= 0.0f) lookLeft = false;
+                }
+                else
+                {
+                    timeCount += turnSpeed * Time.deltaTime * 0.1f;
+                    if (timeCount >= 1.0f) lookLeft = true;
+                }
+                }
             }
             else
             {
-                timeCount += turnSpeed * Time.deltaTime * 0.1f;
-                if (timeCount >= 1.0f) lookLeft = true;
-            }
-        }
-        else
-        {
-            if (canAttack && attackTarget != null)
-            {
-                Vector3 direction = (attackTarget.transform.position - transform.position).normalized;
-                Ray ray = new Ray(transform.position, direction);
-                RaycastHit hit;
-                Debug.DrawRay(transform.position, direction, Color.blue);
-
-                if (Physics.Raycast(ray, out hit))
+                if (canAttack && attackTarget != null)
                 {
-                    if (hit.collider.gameObject.CompareTag("Enemy"))
+                    Vector3 direction = (attackTarget.transform.position - transform.position).normalized;
+                    Ray ray = new Ray(transform.position, direction);
+                    RaycastHit hit;
+                    Debug.DrawRay(transform.position, direction, Color.blue);
+
+                    if (Physics.Raycast(ray, out hit))
                     {
-                        hit.collider.gameObject.GetComponent<Entity>().Damage(20.0f);
-                        if (hit.collider.gameObject.GetComponent<Entity>().Status == StatusMode.Downed)
+                        if (hit.collider.gameObject.CompareTag("Enemy"))
                         {
-                            enemyFound = false;
-                            attackTarget = null;
+                            hit.collider.gameObject.GetComponent<Entity>().Damage(20.0f);
+                            if (hit.collider.gameObject.GetComponent<Entity>().Status == StatusMode.Downed)
+                            {
+                                enemyFound = false;
+                                attackTarget = null;
+                            }
+                            canAttack = false;
                         }
-                        canAttack = false;
                     }
                 }
-            }
-            else
-            {
-                atkTimer -= Time.deltaTime;
-                if (atkTimer <= 0.0f)
+                else
                 {
-                    canAttack = true;
-                    atkTimer = 1.5f;
-                }
+                    atkTimer -= Time.deltaTime;
+                    if (atkTimer <= 0.0f)
+                    {
+                        canAttack = true;
+                        atkTimer = 1.5f;
+                    }
 
+                }
             }
         }
     }
 
     public void Follow()
     {
+        navMeshAgent.isStopped = false;
         navMeshAgent.SetDestination(originPoint.transform.position);
         pivotAngle = Quaternion.Euler((originPoint.transform.position - transform.position).normalized);
     }

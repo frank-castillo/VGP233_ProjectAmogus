@@ -12,7 +12,8 @@ public class EntityController : MonoBehaviour
     [SerializeField] private LayerMask wallMask;
     [SerializeField] Transform leftPoint, forwardPoint, rightPoint;
     Vector3 original_leftPoint_dir, original_forwardPoint_dir, original_rightPoint_dir;
-
+    [SerializeField] List<Transform> closeInPoints = new List<Transform>();
+    List<Vector3> originalCloseInPositions=new List<Vector3>();
 
     private Transform movePositionTransform;
     private NavMeshAgent navMeshAgent;
@@ -25,6 +26,10 @@ public class EntityController : MonoBehaviour
         original_leftPoint_dir = (leftPoint.position - transform.position).normalized;
         original_rightPoint_dir = (rightPoint.position - transform.position).normalized;
 
+        foreach(var point in closeInPoints)
+        {
+            originalCloseInPositions.Add(point.localPosition);
+        }
     }
 
     // Start is called before the first frame update
@@ -83,6 +88,13 @@ public class EntityController : MonoBehaviour
         CheckSide(3.5f, rightPoint, original_rightPoint_dir);
         CheckSide(3.5f, forwardPoint, original_forwardPoint_dir);
 
+        for(int i=0;i<closeInPoints.Count;++i)
+        {
+            CheckCloseIn(closeInPoints[i], originalCloseInPositions[i]);
+
+        }
+       
+
     }
 
     public void CheckSide(float distance, Transform point, Vector3 originalDirection)
@@ -106,6 +118,33 @@ public class EntityController : MonoBehaviour
             point.position = transform.position + originalDirection * distance;
         }
 
+    }
+
+    public void CheckCloseIn(Transform point, Vector3 originalPosition)
+    {
+        Vector3 direction = (point.TransformPoint(originalPosition) - this.transform.position).normalized;
+        float distance = 3;
+        Debug.DrawRay(transform.position,direction,Color.yellow);
+
+        Vector3 desiredPosition = transform.position + direction * distance;
+
+        if (Physics.Raycast(transform.position, direction, out RaycastHit hit, distance, wallMask))
+        {
+            //Debug.Log("hit");
+            //worldPos.y = -1f;
+
+            point.transform.position = hit.point;
+            point.transform.localPosition = new Vector3(point.transform.localPosition.x, -1, point.transform.localPosition.z);
+           // Debug.DrawLine(this.transform.position, hit.point - direction * 2, Color.red);
+            Debug.DrawLine(this.transform.position, point.position, Color.red);
+
+
+        }
+        else
+        {
+            Debug.DrawLine(this.transform.position, point.position,Color.red);
+            point.localPosition = originalPosition;
+        }
     }
     public bool HasKey(KeyType keyToSearch)
     {
